@@ -10,14 +10,14 @@ class ColorsInitial extends ColorsState {
 }
 
 class ColorsLoading extends ColorsState {
-  ColorsLoading(List<CryptoEntity> list) : super(list);
+  ColorsLoading(super.list);
 }
 
 class ColorsLoaded extends ColorsState {
-  ColorsLoaded(List<CryptoEntity> list) : super(list);
+  ColorsLoaded(super.list);
 }
 
 class ColorsError extends ColorsState {
   final String message;
-  ColorsError(List<CryptoEntity> list, this.message) : super(list);
+  ColorsError(super.list, this.message);
 }

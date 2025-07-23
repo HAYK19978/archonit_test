@@ -11,6 +11,7 @@ class ColorsCubit extends Cubit<ColorsState> {
 
   ColorsCubit(this.useCase) : super(ColorsInitial());
 
+  // load more when scroll reaches bottom
   Future<void> fetchNext() async {
     if (isLoading || !hasMore) return;
 
@@ -24,6 +25,27 @@ class ColorsCubit extends Cubit<ColorsState> {
       emit(ColorsLoaded([...state.list, ...newList]));
     } catch (e) {
       emit(ColorsError(state.list, e.toString()));
+    }
+
+    isLoading = false;
+  }
+
+  /// Refresh from scratch
+  Future<void> refresh() async {
+    if (isLoading) return;
+
+    isLoading = true;
+    emit(ColorsLoading([]));
+    offset = 0;
+    hasMore = true;
+
+    try {
+      final newList = await useCase(offset: offset, limit: limit);
+      offset += limit;
+      hasMore = newList.length == limit;
+      emit(ColorsLoaded(newList));
+    } catch (e) {
+      emit(ColorsError([], e.toString()));
     }
 
     isLoading = false;

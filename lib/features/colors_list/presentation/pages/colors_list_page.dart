@@ -27,27 +27,37 @@ class ColorsListPage extends StatelessWidget {
         builder: (context, state) {
           final list = state.list;
 
-          return ListView.builder(
-            controller: scrollController,
-            itemCount: list.length + 1,
-            itemBuilder: (context, index) {
-              if (index == list.length) {
-                return context.read<ColorsCubit>().hasMore
-                    ? const Padding(
-                        padding: EdgeInsets.all(20),
-                        child: Center(child: CircularProgressIndicator()),
-                      )
-                    : const SizedBox.shrink();
-              }
+          return RefreshIndicator(
+            onRefresh: () => onRefresh(context),
+            child: ListView.builder(
+              controller: scrollController,
+              itemCount: list.length + 1,
+              itemBuilder: (context, index) {
+                if (index == list.length) {
+                  return context.read<ColorsCubit>().hasMore
+                      ? const Padding(
+                          padding: EdgeInsets.all(20),
+                          child: Center(child: CircularProgressIndicator()),
+                        )
+                      : const SizedBox.shrink();
+                }
 
-              return CryptoTile(
-                symbol: list[index].symbol,
-                priceUsd: list[index].priceUsd.truncateTo2Decimals(),
-              );
-            },
+                return CryptoTile(
+                  symbol: list[index].symbol,
+                  priceUsd: list[index].priceUsd.truncateTo2Decimals(),
+                );
+              },
+            ),
           );
         },
       ),
     );
+  }
+
+  Future<void> onRefresh(BuildContext context) async {
+    final cubit = context.read<ColorsCubit>();
+    if (!cubit.isLoading) {
+      await cubit.refresh();
+    }
   }
 }
