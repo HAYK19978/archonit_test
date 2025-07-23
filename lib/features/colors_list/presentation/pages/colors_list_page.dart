@@ -1,3 +1,4 @@
+import 'package:archonit_test_prj/core/extension/string_price_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../cubit/colors_cubit.dart';
@@ -41,7 +42,7 @@ class ColorsListPage extends StatelessWidget {
 
               return CryptoTile(
                 symbol: list[index].symbol,
-                priceUsd: list[index].priceUsd,
+                priceUsd: list[index].priceUsd.truncateTo2Decimals(),
               );
             },
           );
