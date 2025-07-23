@@ -1,4 +1,5 @@
 import 'dart:math';
+import 'package:archonit_test_prj/core/consts/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class CryptoTile extends StatelessWidget {
@@ -33,10 +34,25 @@ class CryptoTile extends StatelessWidget {
           const SizedBox(width: 12),
           Text(
             symbol,
-            style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+            style: const TextStyle(
+              fontSize: 17,
+              color: AppColors.primaryColor,
+              fontWeight: FontWeight.w600,
+              fontFamily: 'SF-Pro',
+              height: 24 / 17,
+            ),
           ),
           const Spacer(),
-          Text("\$$priceUsd", style: const TextStyle(fontSize: 16)),
+          Text(
+            "\$$priceUsd",
+            style: TextStyle(
+              fontSize: 17,
+              color: AppColors.primaryColor,
+              fontFamily: 'SF-Pro',
+              fontWeight: FontWeight.w600,
+              height: 24 / 17,
+            ),
+          ),
         ],
       ),
     );

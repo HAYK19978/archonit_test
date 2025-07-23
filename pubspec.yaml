@@ -22,3 +22,13 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+
+  fonts:
+    - family: SF-Pro
+      fonts:
+        - asset: assets/fonts/SF-Pro-Display-Regular.ttf
+        - asset: assets/fonts/SF-Pro-Display-Bold.otf
+          weight: 700
+
+  assets:
+    - assets/fonts/
