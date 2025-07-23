@@ -44,7 +44,7 @@ class ColorsListPage extends StatelessWidget {
 
                 return CryptoTile(
                   symbol: list[index].symbol,
-                  priceUsd: list[index].priceUsd.truncateTo2Decimals(),
+                  priceUsd: list[index].priceUsd.formatPrice(),
                 );
               },
             ),

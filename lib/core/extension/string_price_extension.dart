@@ -1,9 +1,11 @@
-extension StringPriceExtension on String {
-  String truncateTo2Decimals() {
-    final dotIndex = indexOf('.');
-    if (dotIndex == -1) return this; // нет точки — возвращаем как есть
+import 'package:intl/intl.dart';
 
-    final end = (dotIndex + 3 <= length) ? dotIndex + 3 : length;
-    return substring(0, end);
+extension StringPriceExtension on String {
+  String formatPrice() {
+    final number = double.tryParse(this);
+    if (number == null) return this;
+
+    final formatter = NumberFormat('#,##0.00');
+    return formatter.format(number);
   }
 }
